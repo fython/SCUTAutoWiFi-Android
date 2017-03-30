@@ -41,11 +41,16 @@ class MainActivity : Activity(), AnkoLogger {
 
 	private fun doConnect() {
 		doAsync {
-			val isConnected = DormitoryApi
+			val result = DormitoryApi
 					.setCurrentIp(WifiUtils.getCurrentIP(this@MainActivity))
-					.connect("", "")
+					.connect(username = "", password = "")
+			val errCode = DormitoryApi.checkError()
 			uiThread {
-				info("isConnected: $isConnected")
+				val dialog = AlertDialogBuilder(this@MainActivity)
+				dialog.title(if (result is String && result.contains("登陆成功", false)) "Success" else "Fail")
+				dialog.message("$result\n\n$errCode")
+				dialog.okButton { }
+				dialog.show()
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package moe.feng.scut.autowifi.api
 
 import moe.feng.scut.autowifi.support.HttpUtils
+import java.nio.charset.Charset
 
 class DormitoryApi {
 
@@ -16,7 +17,7 @@ class DormitoryApi {
 			return this
 		}
 
-		fun connect(username : String, password : String) : Boolean {
+		fun connect(username : String, password : String) : String? {
 			val operation = "Login"
 
 			val result = HttpUtils.postForm(
@@ -34,7 +35,13 @@ class DormitoryApi {
 							"upass" to password
 					)
 			)
-			return result is String && result.contains("已经成功登录")
+			// return result is String && result.contains("已经成功登录")
+			return if (result is ByteArray) String(bytes = result, charset = Charset.forName("GB2312")) else null
+		}
+
+		fun checkError() : String? {
+			val result = HttpUtils.get("https://s.scut.edu.cn/errcode")
+			return if (result is ByteArray) String(bytes = result, charset = Charset.forName("GB2312")) else null
 		}
 
 		fun getWlanCenterIp(ip : String) : String {

@@ -22,13 +22,14 @@ class HttpUtils {
 			okHttpClient = OkHttpClient.Builder().cookieJar(cookieJar).build()
 		}
 
-		fun get(url : String) : String? {
+		fun get(url : String) : ByteArray? {
 			Log.d(TAG, "Request url: " + url)
 			val request = Request.Builder().url(url).build()
 			try {
 				val response = okHttpClient.newCall(request).execute()
 				Log.d(TAG, "Response code:" + response.code())
-				val result = response.body().string()
+				val result = response.body().bytes()
+				Log.d(TAG, "Response data: " + String(result))
 				return result
 			} catch (e : Exception) {
 				e.printStackTrace()
@@ -36,7 +37,7 @@ class HttpUtils {
 			}
 		}
 
-		fun postForm(url: String, params: Map<String, Any>?): String? {
+		fun postForm(url: String, params: Map<String, Any>?): ByteArray? {
 			Log.d(TAG, "Request url: " + url)
 			val builder = FormBody.Builder()
 			if (params != null) for ((key, value) in params) {
@@ -48,7 +49,8 @@ class HttpUtils {
 			try {
 				val response = okHttpClient.newCall(request).execute()
 				Log.d(TAG, "Response code: " + response.code())
-				val result = response.body().string()
+				val result = response.body().bytes()
+				Log.d(TAG, "Response data: " + String(result))
 				return result
 			} catch (e: Exception) {
 				e.printStackTrace()
