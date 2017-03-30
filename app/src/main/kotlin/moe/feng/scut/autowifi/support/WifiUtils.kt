@@ -109,10 +109,8 @@ class WifiUtils {
 					.any { it in '0'..'9' || it in 'A'..'F' || it in 'a'..'f' }
 		}
 
-		private fun convertIpToStr(i: Int): String = (i shr 24 and 0xFF).toString() +
-					"." + (i shr 16 and 0xFF).toString() +
-					"." + (i shr 8 and 0xFF).toString() +
-					"." + (i and 0xFF).toString()
+		private fun convertIpToStr(i: Int): String = (i and 0xFF).toString() + "." +
+					(i shr 8 and 0xFF) + "." + (i shr 16 and 0xFF) + "." + (i shr 24 and 0xFF)
 
 	}
 
