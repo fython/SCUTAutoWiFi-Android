@@ -1,0 +1,9 @@
+<resources>
+
+	<string name="app_name">SCUTAutoWiFi</string>
+
+	<string name="dialog_connected_wifi_but_not_scut">Switch to SCUT WiFi</string>
+	<string name="dialog_connected_wifi_but_not_scut_msg">You\'re using other wireless network. This application doesn\'t
+		support auto-login. Do you want to switch to SCUT wireless network?</string>
+
+</resources>

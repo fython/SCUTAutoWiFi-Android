@@ -1,0 +1,15 @@
+<resources>
+
+	<style name="BaseAppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+		<item name="android:colorPrimary">@color/teal_500</item>
+		<item name="android:colorPrimaryDark">@color/teal_700</item>
+		<item name="android:colorAccent">@color/orange_a200</item>
+	</style>
+
+	<style name="AppTheme.Translucent" parent="BaseAppTheme">
+		<item name="android:windowTranslucentStatus">true</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowActionBar">false</item>
+	</style>
+
+</resources>
