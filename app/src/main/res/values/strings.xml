@@ -25,6 +25,7 @@
 	<string name="pref_account_user_name_hint">Mostly use Student ID as username</string>
 	<string name="pref_account_user_pwd">Password</string>
 	<string name="pref_account_user_pwd_hint">Enter your password</string>
+	<string name="pref_account_user_pwd_saved">Saved</string>
 
 	<string name="pref_about_header">About</string>
 	<string name="pref_about_github">GitHub Repository</string>

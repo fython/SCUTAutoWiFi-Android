@@ -37,7 +37,7 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 		prefUsername.text = Hawk.get("username", "")
 		prefPassword.text = Hawk.get("password", "")
 		if (!prefUsername.text.isNullOrEmpty()) prefUsername.summary = prefUsername.text
-		if (!prefPassword.text.isNullOrEmpty()) prefPassword.summary = prefPassword.text
+		if (!prefPassword.text.isNullOrEmpty()) prefPassword.summary = getString(R.string.pref_account_user_pwd_saved)
 
 		var versionName: String? = null
 		var versionCode = 0
@@ -66,7 +66,9 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 			prefPassword -> {
 				Hawk.put("password", newValue as String)
 				preference.summary =
-						if (newValue.isNullOrEmpty()) getString(R.string.pref_account_user_pwd_hint) else newValue
+						if (newValue.isNullOrEmpty())
+							getString(R.string.pref_account_user_pwd_hint)
+						else getString(R.string.pref_account_user_pwd_saved)
 			}
 		}
 		return !(newValue is Boolean && !newValue)

@@ -1,0 +1,39 @@
+<resources>
+
+	<string name="app_name">SCUTAutoWiFi</string>
+
+	<string name="status_text_format">状态: %s</string>
+	<string name="status_text_mobile_connected">使用移动网络</string>
+	<string name="status_text_disconnected">未连接</string>
+	<string name="status_text_wifi_connected_other">已连接 (其它网络: %s).</string>
+	<string name="status_text_wifi_connecting">连接中&#8230;</string>
+	<string name="status_text_wifi_connected_scut">已连接 (SCUT-Student)，需要登录</string>
+	<string name="status_text_wifi_connected_scut_logon">已连接并登录 (SCUT-Student)</string>
+
+	<string name="dialog_no_account">没有帐号</string>
+	<string name="dialog_no_account_msg">请移步到设置添加你的帐号。</string>
+
+	<string name="dialog_connected_wifi_but_not_scut">切换到 SCUT WiFi</string>
+	<string name="dialog_connected_wifi_but_not_scut_msg">你正在使用其它网络，这个应用不支持自动登录。你确定要切换到 SCUT WiFi 吗？</string>
+
+	<!-- Settings -->
+	<string name="title_activity_settings">设置</string>
+
+	<string name="pref_account_header">SCUT 网络帐号</string>
+	<string name="pref_account_user_name">用户名</string>
+	<string name="pref_account_user_name_hint">通常使用学生 ID 作为帐号</string>
+	<string name="pref_account_user_pwd">密码</string>
+	<string name="pref_account_user_pwd_hint">输入你的密码</string>
+	<string name="pref_account_user_pwd_saved">已保存</string>
+
+	<string name="pref_about_header">关于</string>
+	<string name="pref_about_github">GitHub 仓库</string>
+	<string name="pref_about_github_url">https://github.com/fython/SCUTAutoWiFi-Android</string>
+	<string name="pref_about_author_telegram">作者 Telegram</string>
+	<string name="pref_about_author_telegram_url">https://t.me/fython</string>
+	<string name="pref_about_author_email">通过邮箱联系</string>
+	<string name="pref_about_author_email_url">fythonx\@gmail.com</string>
+	<string name="pref_about_alipay_donate">捐赠</string>
+	<string name="pref_about_alipay_donate_url">316643843\@qq.com</string>
+
+</resources>
