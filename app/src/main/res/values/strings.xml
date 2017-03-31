@@ -2,6 +2,14 @@
 
 	<string name="app_name">SCUTAutoWiFi</string>
 
+	<string name="status_text_format">Status: %s</string>
+	<string name="status_text_mobile_connected">Using mobile network.</string>
+	<string name="status_text_disconnected">Disconnected.</string>
+	<string name="status_text_wifi_connected_other">Connected (Other: %s).</string>
+	<string name="status_text_wifi_connecting">Connecting&#8230;</string>
+	<string name="status_text_wifi_connected_scut">Connected (SCUT-Student). Need login</string>
+	<string name="status_text_wifi_connected_scut_logon">Connected (SCUT-Student).</string>
+
 	<string name="dialog_connected_wifi_but_not_scut">Switch to SCUT WiFi</string>
 	<string name="dialog_connected_wifi_but_not_scut_msg">You\'re using other wireless network. This application doesn\'t
 		support auto-login. Do you want to switch to SCUT wireless network?</string>
