@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<PreferenceCategory android:title="@string/pref_account_header">
+
+		<EditTextPreference
+				android:key="username"
+				android:title="@string/pref_account_user_name"
+				android:selectAllOnFocus="true"
+				android:inputType="number"
+				android:singleLine="true"
+				android:hint="@string/pref_account_user_name_hint"
+				android:summary="@string/pref_account_user_name_hint"
+				android:typeface="monospace"
+				android:maxLines="1"/>
+
+		<EditTextPreference
+				android:key="password"
+				android:title="@string/pref_account_user_pwd"
+				android:selectAllOnFocus="true"
+				android:inputType="textPassword"
+				android:singleLine="true"
+				android:hint="@string/pref_account_user_pwd_hint"
+				android:summary="@string/pref_account_user_pwd_hint"
+				android:typeface="monospace"
+				android:maxLines="1"/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory android:title="@string/pref_about_header">
+
+		<Preference android:key="version" android:title="@string/app_name"/>
+
+		<Preference
+				android:key="github"
+				android:title="@string/pref_about_github"
+				android:summary="@string/pref_about_github_url"/>
+
+		<Preference
+				android:key="telegram"
+		        android:title="@string/pref_about_author_telegram"
+		        android:summary="@string/pref_about_author_telegram_url"/>
+
+		<Preference
+				android:key="email"
+		        android:title="@string/pref_about_author_email"
+		        android:summary="@string/pref_about_author_email_url"/>
+
+	</PreferenceCategory>
+
+</PreferenceScreen>

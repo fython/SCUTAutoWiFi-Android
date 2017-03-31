@@ -7,8 +7,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.widget.EditText
+import android.text.TextUtils
+import android.widget.ImageButton
 import android.widget.TextView
+import com.orhanobut.hawk.Hawk
 
 import moe.feng.material.statusbar.StatusBarCompat
 import moe.feng.scut.autowifi.api.DormitoryApi
@@ -18,10 +20,9 @@ import org.jetbrains.anko.*
 
 class MainActivity : Activity(), AnkoLogger {
 
+	val settingsButton by lazy { find<ImageButton>(R.id.btn_settings) }
 	val fab by lazy { find<FloatingActionButton>(R.id.fab) }
 	val statusText by lazy { find<TextView>(R.id.status_text) }
-	val userName by lazy { find<EditText>(R.id.user_name) }
-	val userPwd by lazy { find<EditText>(R.id.user_pwd) }
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		StatusBarCompat.setUpActivity(this)
@@ -29,6 +30,7 @@ class MainActivity : Activity(), AnkoLogger {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main2)
 
+		settingsButton.onClick { startActivity<SettingsActivity>() }
 		fab.onClick {
 			if (WifiUtils.isWifiConnected(this) && !WifiUtils.isSCUTSSID(this)) {
 				val dialog = AlertDialogBuilder(this)
@@ -69,10 +71,18 @@ class MainActivity : Activity(), AnkoLogger {
 	}
 
 	private fun doConnect() {
+		if (TextUtils.isEmpty(Hawk.get("username", "")) || TextUtils.isEmpty(Hawk.get("password", ""))) {
+			val dialog = AlertDialogBuilder(this)
+			dialog.title(R.string.dialog_no_account)
+			dialog.message(R.string.dialog_no_account_msg)
+			dialog.okButton { startActivity<SettingsActivity>() }
+			dialog.show()
+			return
+		}
 		doAsync {
 			val result = DormitoryApi
 					.setCurrentIp(WifiUtils.getCurrentIP(this@MainActivity))
-					.connect(username = userName.text.toString(), password = userPwd.text.toString())
+					.connect(username = Hawk.get("username"), password = Hawk.get("password"))
 			val errCode = DormitoryApi.checkError()
 			uiThread {
 				val dialog = AlertDialogBuilder(this@MainActivity)

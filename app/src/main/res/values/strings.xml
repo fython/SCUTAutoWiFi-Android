@@ -10,8 +10,30 @@
 	<string name="status_text_wifi_connected_scut">Connected (SCUT-Student). Need login</string>
 	<string name="status_text_wifi_connected_scut_logon">Connected (SCUT-Student).</string>
 
+	<string name="dialog_no_account">No Account</string>
+	<string name="dialog_no_account_msg">Please go to settings and set up your account.</string>
+
 	<string name="dialog_connected_wifi_but_not_scut">Switch to SCUT WiFi</string>
 	<string name="dialog_connected_wifi_but_not_scut_msg">You\'re using other wireless network. This application doesn\'t
 		support auto-login. Do you want to switch to SCUT wireless network?</string>
+
+	<!-- Settings -->
+	<string name="title_activity_settings">Settings</string>
+
+	<string name="pref_account_header">SCUT Network Account</string>
+	<string name="pref_account_user_name">Username</string>
+	<string name="pref_account_user_name_hint">Mostly use Student ID as username</string>
+	<string name="pref_account_user_pwd">Password</string>
+	<string name="pref_account_user_pwd_hint">Enter your password</string>
+
+	<string name="pref_about_header">About</string>
+	<string name="pref_about_github">GitHub Repository</string>
+	<string name="pref_about_github_url">https://github.com/fython/SCUTAutoWiFi-Android</string>
+	<string name="pref_about_author_telegram">Author Telegram</string>
+	<string name="pref_about_author_telegram_url">https://t.me/fython</string>
+	<string name="pref_about_author_email">Contact via Email</string>
+	<string name="pref_about_author_email_url">fythonx\@gmail.com</string>
+	<string name="pref_about_alipay_donate">Donate me</string>
+	<string name="pref_about_alipay_donate_url">316643843\@qq.com</string>
 
 </resources>
