@@ -24,7 +24,7 @@ class WifiUtils {
 		fun isWifiConnected(context : Context) =
 				getConnectivityManager(context).getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected
 
-		fun getCurrentSSID(context : Context) = getWifiManager(context).connectionInfo.ssid
+		fun getCurrentSSID(context : Context) = getWifiManager(context).connectionInfo.ssid.replace("\"", "", false)
 
 		fun getCurrentIP(context : Context) = convertIpToStr(getWifiManager(context).connectionInfo.ipAddress)
 
@@ -40,10 +40,14 @@ class WifiUtils {
 			val netID = wifiManager.addNetwork(wifiConfig)
 			val enabled = wifiManager.enableNetwork(netID, true)
 
-			return enabled
+			return enabled && wifiManager.saveConfiguration()
 		}
 
 		fun reconnect(context : Context) = getWifiManager(context).reconnect()
+
+		fun enableWifi(context : Context) = getWifiManager(context).setWifiEnabled(true)
+
+		fun getState(context : Context) = getWifiManager(context).wifiState
 
 		private fun isExists(context : Context, SSID: String): WifiConfiguration? {
 			val existingConfigs = getWifiManager(context).configuredNetworks

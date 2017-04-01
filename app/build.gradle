@@ -12,11 +12,15 @@ android {
         targetSdkVersion TARGET_SDK_VERSION.toInteger()
         versionCode VERSION_CODE.toInteger()
         versionName VERSION_NAME
+        resConfigs "en", "zh_cn", "zh_tw"
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
+            pseudoLocalesEnabled true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

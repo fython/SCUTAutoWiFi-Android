@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.ImageButton
@@ -45,6 +46,13 @@ class MainActivity : Activity(), AnkoLogger {
 				}
 				dialog.cancelButton {  }
 				dialog.show()
+				return@onClick
+			} else if (!WifiUtils.isWifiConnected(this)) {
+				WifiUtils.enableWifi(this)
+				doAsync {
+					while (WifiUtils.getState(this@MainActivity) == WifiManager.WIFI_STATE_ENABLING) Thread.sleep(100)
+					uiThread { WifiUtils.switchToSCUT(this@MainActivity) }
+				}
 				return@onClick
 			}
 			doConnect()
@@ -130,7 +138,7 @@ class MainActivity : Activity(), AnkoLogger {
 				if (it) {
 					setStatusText(getString(R.string.status_text_wifi_connected_scut))
 				} else {
-					setStatusText(getString(R.string.status_text_wifi_connected_other))
+					setStatusText(getString(R.string.status_text_wifi_connected_other, WifiUtils.getCurrentSSID(this)))
 				}
 			}
 	)
