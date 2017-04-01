@@ -9,6 +9,7 @@ import android.view.MenuItem
 import com.orhanobut.hawk.Hawk
 import android.support.customtabs.CustomTabsIntent
 import android.content.pm.PackageManager
+import android.preference.SwitchPreference
 import org.jetbrains.anko.email
 
 
@@ -20,6 +21,7 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 	lateinit var prefGithub : Preference
 	lateinit var prefTelegram : Preference
 	lateinit var prefEmail : Preference
+	lateinit var prefAutoLogin : SwitchPreference
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -33,11 +35,13 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 		prefGithub = findPreference("github")
 		prefTelegram = findPreference("telegram")
 		prefEmail = findPreference("email")
+		prefAutoLogin = findPreference("auto_login") as SwitchPreference
 
 		prefUsername.text = Hawk.get("username", "")
 		prefPassword.text = Hawk.get("password", "")
 		if (!prefUsername.text.isNullOrEmpty()) prefUsername.summary = prefUsername.text
 		if (!prefPassword.text.isNullOrEmpty()) prefPassword.summary = getString(R.string.pref_account_user_pwd_saved)
+		prefAutoLogin.isChecked = Hawk.get("auto_login", true)
 
 		var versionName: String? = null
 		var versionCode = 0
@@ -51,6 +55,7 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 
 		prefUsername.onPreferenceChangeListener = this
 		prefPassword.onPreferenceChangeListener = this
+		prefAutoLogin.onPreferenceChangeListener = this
 		prefGithub.setOnPreferenceClickListener { openWebsite(getString(R.string.pref_about_github_url)); true }
 		prefTelegram.setOnPreferenceClickListener { openWebsite(getString(R.string.pref_about_author_telegram_url)); true }
 		prefEmail.setOnPreferenceClickListener { email(getString(R.string.pref_about_author_email_url), "", ""); true }
@@ -70,8 +75,9 @@ class SettingsActivity : PreferenceActivity(), Preference.OnPreferenceChangeList
 							getString(R.string.pref_account_user_pwd_hint)
 						else getString(R.string.pref_account_user_pwd_saved)
 			}
+			prefAutoLogin -> Hawk.put("auto_login", (newValue as Boolean))
 		}
-		return !(newValue is Boolean && !newValue)
+		return true
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {

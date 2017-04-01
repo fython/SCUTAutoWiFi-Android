@@ -27,6 +27,15 @@
 
 	</PreferenceCategory>
 
+	<PreferenceCategory android:title="@string/pref_auto_header">
+
+		<SwitchPreference
+				android:key="auto_login"
+				android:title="@string/pref_auto_login"
+				android:summary="@string/pref_auto_login_summary"/>
+
+	</PreferenceCategory>
+
 	<PreferenceCategory android:title="@string/pref_about_header">
 
 		<Preference android:key="version" android:title="@string/app_name"/>

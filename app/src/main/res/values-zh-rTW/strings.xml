@@ -7,14 +7,18 @@
 	<string name="status_text_disconnected">未連接</string>
 	<string name="status_text_wifi_connected_other">已連接 (其他網路: %s).</string>
 	<string name="status_text_wifi_connecting">連接中&#8230;</string>
-	<string name="status_text_wifi_connected_scut">已連接 (SCUT-Student)，需要登錄</string>
+	<string name="status_text_wifi_connected_scut">已連接 (SCUT-Student)，需要登入</string>
 	<string name="status_text_wifi_connected_scut_logon">已連接並登錄 (SCUT-Student)</string>
 
 	<string name="dialog_no_account">沒有帳戶</string>
 	<string name="dialog_no_account_msg">請移步到設定並添加你的帳戶。</string>
 
 	<string name="dialog_connected_wifi_but_not_scut">切換到 SCUT WiFi</string>
-	<string name="dialog_connected_wifi_but_not_scut_msg">你正在使用其他網路，這個程式不支援自動登錄。你確定要切換到 SCUT WiFi 嗎？</string>
+	<string name="dialog_connected_wifi_but_not_scut_msg">你正在使用其他網路，這個程式不支援自動登入。你確定要切換到 SCUT WiFi 嗎？</string>
+
+	<!-- Auto login -->
+	<string name="noti_auto_login_need_account">設定你的 SCUT WiFi 帳戶</string>
+	<string name="noti_auto_login_need_account_text">完成後你將可以自動登入</string>
 
 	<!-- Settings -->
 	<string name="title_activity_settings">設定</string>
@@ -25,6 +29,10 @@
 	<string name="pref_account_user_pwd">密碼</string>
 	<string name="pref_account_user_pwd_hint">輸入你的密碼</string>
 	<string name="pref_account_user_pwd_saved">已保存</string>
+
+	<string name="pref_auto_header">自動連接</string>
+	<string name="pref_auto_login">自動登錄</string>
+	<string name="pref_auto_login_summary">連接 SCUT Wifi 後將自動登錄</string>
 
 	<string name="pref_about_header">關於</string>
 	<string name="pref_about_github">GitHub 倉庫</string>

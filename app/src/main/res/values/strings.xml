@@ -17,6 +17,10 @@
 	<string name="dialog_connected_wifi_but_not_scut_msg">You\'re using other wireless network. This application doesn\'t
 		support auto-login. Do you want to switch to SCUT wireless network?</string>
 
+	<!-- Auto login -->
+	<string name="noti_auto_login_need_account">Set up your SCUT WiFi account</string>
+	<string name="noti_auto_login_need_account_text">You can log in automatically after setting.</string>
+
 	<!-- Settings -->
 	<string name="title_activity_settings">Settings</string>
 
@@ -26,6 +30,10 @@
 	<string name="pref_account_user_pwd">Password</string>
 	<string name="pref_account_user_pwd_hint">Enter your password</string>
 	<string name="pref_account_user_pwd_saved">Saved</string>
+
+	<string name="pref_auto_header">Auto connect</string>
+	<string name="pref_auto_login">Auto Login</string>
+	<string name="pref_auto_login_summary">Login automatically after connecting SCUT Wifi</string>
 
 	<string name="pref_about_header">About</string>
 	<string name="pref_about_github">GitHub Repository</string>

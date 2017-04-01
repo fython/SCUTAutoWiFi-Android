@@ -16,6 +16,10 @@
 	<string name="dialog_connected_wifi_but_not_scut">切换到 SCUT WiFi</string>
 	<string name="dialog_connected_wifi_but_not_scut_msg">你正在使用其它网络，这个应用不支持自动登录。你确定要切换到 SCUT WiFi 吗？</string>
 
+	<!-- Auto login -->
+	<string name="noti_auto_login_need_account">设置你的 SCUT WiFi 帐号</string>
+	<string name="noti_auto_login_need_account_text">完成后你将可以自动登录</string>
+
 	<!-- Settings -->
 	<string name="title_activity_settings">设置</string>
 
@@ -25,6 +29,10 @@
 	<string name="pref_account_user_pwd">密码</string>
 	<string name="pref_account_user_pwd_hint">输入你的密码</string>
 	<string name="pref_account_user_pwd_saved">已保存</string>
+
+	<string name="pref_auto_header">自动</string>
+	<string name="pref_auto_login">自动登录</string>
+	<string name="pref_auto_login_summary">连接 SCUT WiFi 后自动登录</string>
 
 	<string name="pref_about_header">关于</string>
 	<string name="pref_about_github">GitHub 仓库</string>

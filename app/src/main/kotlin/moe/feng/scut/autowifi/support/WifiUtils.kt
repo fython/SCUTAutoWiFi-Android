@@ -9,7 +9,7 @@ class WifiUtils {
 
 	companion object {
 
-		private val SCUT_STUDENT_SSID = "scut-student"
+		val SCUT_STUDENT_SSID = "scut-student"
 
 		private fun getWifiManager(context : Context) =
 				context.getSystemService(Context.WIFI_SERVICE) as WifiManager
