@@ -58,6 +58,19 @@ class HttpUtils {
 			}
 		}
 
+		fun ping(url : String) : Boolean {
+			Log.d(TAG, "Request url: " + url)
+			val request = Request.Builder().url(url).build()
+			try {
+				val response = okHttpClient.newCall(request).execute()
+				Log.d(TAG, "Response code:" + response.code())
+				return response.code() == 200 || response.code() == 301
+			} catch (e : Exception) {
+				e.printStackTrace()
+				return false
+			}
+		}
+
 	}
 
 }

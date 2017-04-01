@@ -39,6 +39,17 @@ class DormitoryApi {
 			return if (result is ByteArray) String(bytes = result, charset = Charset.forName("GB2312")) else null
 		}
 
+		fun logout() : String? {
+			val operation = "Logout"
+
+			val result = HttpUtils.get(
+					url = "https://s.scut.edu.cn:801/eportal/?c=ACSetting&a=$operation" +
+							"&wlanuserip=$wlanuserip&wlanacip=$wlancip&wlanacname=&redirect=&session=" +
+							"&vlanid=scut-student&port=&iTermType=$iTermType&protocol=https:"
+			)
+			return if (result is ByteArray) String(bytes = result, charset = Charset.forName("GB2312")) else null
+		}
+
 		fun checkError() : String? {
 			val result = HttpUtils.get("https://s.scut.edu.cn/errcode")
 			return if (result is ByteArray) String(bytes = result, charset = Charset.forName("GB2312")) else null

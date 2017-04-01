@@ -16,6 +16,9 @@
 	<string name="dialog_connected_wifi_but_not_scut">切換到 SCUT WiFi</string>
 	<string name="dialog_connected_wifi_but_not_scut_msg">你正在使用其他網路，這個程式不支援自動登入。你確定要切換到 SCUT WiFi 嗎？</string>
 
+	<string name="dialog_log_out">登出</string>
+	<string name="dialog_log_out_msg">所有連接都會在登出後斷開。</string>
+
 	<!-- Auto login -->
 	<string name="noti_auto_login_need_account">設定你的 SCUT WiFi 帳戶</string>
 	<string name="noti_auto_login_need_account_text">完成後你將可以自動登入</string>

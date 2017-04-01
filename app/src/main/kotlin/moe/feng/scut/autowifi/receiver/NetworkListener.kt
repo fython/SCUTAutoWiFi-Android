@@ -74,6 +74,9 @@ class NetworkListener : BroadcastReceiver(), AnkoLogger {
 						.notify(100, builder.build())
 			} else {
 				doAsync {
+					if (WifiUtils.isReachableBaidu()) {
+						return@doAsync
+					}
 					val result = DormitoryApi
 							.setCurrentIp(WifiUtils.getCurrentIP(context))
 							.connect(username = Hawk.get("username"), password = Hawk.get("password"))

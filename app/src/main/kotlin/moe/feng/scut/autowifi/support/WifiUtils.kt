@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.net.wifi.WifiConfiguration
+import java.net.InetAddress
 
 class WifiUtils {
 
@@ -24,6 +25,8 @@ class WifiUtils {
 		fun getCurrentIP(context : Context) = convertIpToStr(getWifiManager(context).connectionInfo.ipAddress)
 
 		fun isSCUTSSID(context : Context) = getCurrentSSID(context).contains(SCUT_STUDENT_SSID, false)
+
+		fun isReachableBaidu() : Boolean = HttpUtils.ping("https://www.baidu.com")
 
 		fun switchToSCUT(context : Context) : Boolean {
 			val wifiConfig = createWifiInfo(SCUT_STUDENT_SSID)

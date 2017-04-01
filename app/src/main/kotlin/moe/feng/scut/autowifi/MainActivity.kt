@@ -25,6 +25,8 @@ class MainActivity : Activity(), AnkoLogger {
 	val fab by lazy { find<FloatingActionButton>(R.id.fab) }
 	val statusText by lazy { find<TextView>(R.id.status_text) }
 
+	var reach = false
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		StatusBarCompat.setUpActivity(this)
 
@@ -33,29 +35,46 @@ class MainActivity : Activity(), AnkoLogger {
 
 		settingsButton.onClick { startActivity<SettingsActivity>() }
 		fab.onClick {
-			if (WifiUtils.isWifiConnected(this) && !WifiUtils.isSCUTSSID(this)) {
-				val dialog = AlertDialogBuilder(this)
-				dialog.title(R.string.dialog_connected_wifi_but_not_scut)
-				dialog.message(R.string.dialog_connected_wifi_but_not_scut_msg)
-				dialog.okButton {
-					if (WifiUtils.switchToSCUT(this@MainActivity)) {
-						doConnect()
-					} else {
-
+			if (reach) {
+				if (WifiUtils.isWifiConnected(this) && WifiUtils.isSCUTSSID(this)) {
+					val dialog = AlertDialogBuilder(this)
+					dialog.title(R.string.dialog_log_out)
+					dialog.message(R.string.dialog_log_out_msg)
+					dialog.okButton {
+						doAsync {
+							DormitoryApi.logout()
+							uiThread { networkStateReceiver.checkManually(this@MainActivity) }
+						}
 					}
+					dialog.cancelButton {  }
+					dialog.show()
+					return@onClick
 				}
-				dialog.cancelButton {  }
-				dialog.show()
-				return@onClick
-			} else if (!WifiUtils.isWifiConnected(this)) {
-				WifiUtils.enableWifi(this)
-				doAsync {
-					while (WifiUtils.getState(this@MainActivity) == WifiManager.WIFI_STATE_ENABLING) Thread.sleep(100)
-					uiThread { WifiUtils.switchToSCUT(this@MainActivity) }
+			} else {
+				if (WifiUtils.isWifiConnected(this) && !WifiUtils.isSCUTSSID(this)) {
+					val dialog = AlertDialogBuilder(this)
+					dialog.title(R.string.dialog_connected_wifi_but_not_scut)
+					dialog.message(R.string.dialog_connected_wifi_but_not_scut_msg)
+					dialog.okButton {
+						if (WifiUtils.switchToSCUT(this@MainActivity)) {
+							doConnect()
+						} else {
+
+						}
+					}
+					dialog.cancelButton {  }
+					dialog.show()
+					return@onClick
+				} else if (!WifiUtils.isWifiConnected(this)) {
+					WifiUtils.enableWifi(this)
+					doAsync {
+						while (WifiUtils.getState(this@MainActivity) == WifiManager.WIFI_STATE_ENABLING) Thread.sleep(100)
+						uiThread { WifiUtils.switchToSCUT(this@MainActivity) }
+					}
+					return@onClick
 				}
-				return@onClick
+				doConnect()
 			}
-			doConnect()
 		}
 
 		/** Check manually after launching */
@@ -130,15 +149,28 @@ class MainActivity : Activity(), AnkoLogger {
 	private val networkStateReceiver = NetworkStateReceiver(
 			disconnected = {
 				setStatusText(getString(R.string.status_text_disconnected))
+				fab.setImageResource(R.drawable.ic_settings_input_component_black_24dp)
 			},
 			connectedMobile = {
 				setStatusText(getString(R.string.status_text_mobile_connected))
+				fab.setImageResource(R.drawable.ic_settings_input_component_black_24dp)
 			},
 			connectedWifi = {
 				if (it) {
-					setStatusText(getString(R.string.status_text_wifi_connected_scut))
+					doAsync {
+						reach = WifiUtils.isReachableBaidu()
+						uiThread {
+							setStatusText(getString(
+									if (!reach) R.string.status_text_wifi_connected_scut
+									else R.string.status_text_wifi_connected_scut_logon
+							))
+							fab.setImageResource(if (reach) R.drawable.ic_done_black_24dp
+							else R.drawable.ic_settings_input_component_black_24dp)
+						}
+					}
 				} else {
 					setStatusText(getString(R.string.status_text_wifi_connected_other, WifiUtils.getCurrentSSID(this)))
+					fab.setImageResource(R.drawable.ic_settings_input_component_black_24dp)
 				}
 			}
 	)
