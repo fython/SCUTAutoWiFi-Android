@@ -4,17 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.net.wifi.WifiConfiguration
-import android.net.wifi.WifiConfiguration.KeyMgmt
-import android.net.wifi.WifiConfiguration.AuthAlgorithm
-import android.text.TextUtils
 
 class WifiUtils {
 
 	companion object {
 
 		private val SCUT_STUDENT_SSID = "scut-student"
-
-		enum class WifiCipherType { WIFICIPHER_WEP, WIFICIPHER_WPA, WIFICIPHER_NOPASS, WIFICIPHER_INVALID }
 
 		private fun getWifiManager(context : Context) =
 				context.getSystemService(Context.WIFI_SERVICE) as WifiManager
@@ -31,7 +26,7 @@ class WifiUtils {
 		fun isSCUTSSID(context : Context) = getCurrentSSID(context).contains(SCUT_STUDENT_SSID, false)
 
 		fun switchToSCUT(context : Context) : Boolean {
-			val wifiConfig = createWifiInfo(SCUT_STUDENT_SSID, null, WifiCipherType.WIFICIPHER_NOPASS)
+			val wifiConfig = createWifiInfo(SCUT_STUDENT_SSID)
 			val wifiManager = getWifiManager(context)
 
 			val tempConfig = isExists(context, SCUT_STUDENT_SSID)
@@ -54,48 +49,18 @@ class WifiUtils {
 			return existingConfigs.firstOrNull { it.SSID == "\"" + SSID + "\"" }
 		}
 
-		private fun createWifiInfo(SSID: String, password: String?, type: WifiCipherType): WifiConfiguration {
+		private fun createWifiInfo(SSID: String): WifiConfiguration {
 			val config = WifiConfiguration()
-			config.allowedAuthAlgorithms.clear()
-			config.allowedGroupCiphers.clear()
-			config.allowedKeyManagement.clear()
-			config.allowedPairwiseCiphers.clear()
-			config.allowedProtocols.clear()
-			config.SSID = "\"" + SSID + "\""
-			// nopass
-			if (type === WifiCipherType.WIFICIPHER_NOPASS) {
-				config.wepKeys[0] = ""
-				config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE)
-				config.wepTxKeyIndex = 0
-			}
-			// wep
-			if (type === WifiCipherType.WIFICIPHER_WEP) {
-				if (!TextUtils.isEmpty(password)) {
-					if (isHexWepKey(password!!)) {
-						config.wepKeys[0] = password
-					} else {
-						config.wepKeys[0] = "\"" + password + "\""
-					}
-				}
-				config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN)
-				config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED)
-				config.allowedKeyManagement.set(KeyMgmt.NONE)
-				config.wepTxKeyIndex = 0
-			}
-			// wpa
-			if (type === WifiCipherType.WIFICIPHER_WPA) {
-				config.preSharedKey = "\"" + password + "\""
-				config.hiddenSSID = true
-				config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN)
-				config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP)
-				config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK)
-				config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP)
-				// 此处需要修改否则不能自动重联
-				// config.allowedProtocols.set(WifiConfiguration.Protocol.WPA);
-				config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP)
-				config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP)
-				config.status = WifiConfiguration.Status.ENABLED
-			}
+			config.SSID = "\"$SSID\""
+			config.preSharedKey = null
+			config.hiddenSSID = true
+			config.status = WifiConfiguration.Status.ENABLED
+			config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP)
+			config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
+			config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.TKIP)
+			config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.CCMP)
+			config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE)
+			config.allowedProtocols.set(WifiConfiguration.Protocol.WPA)
 			return config
 		}
 
